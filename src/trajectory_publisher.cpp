@@ -33,7 +33,16 @@ public:
 private:
   void getParams() {
     ros::NodeHandle private_nh("~");
-    // [ToDo] get tf_topic_, polling_, tf_polling_hz_
+    private_nh.getParam("tf_topic", tf_topic_);
+    private_nh.getParam("polling", polling_);
+    private_nh.getParam("tf_polling_hz", tf_polling_hz_);
+    private_nh.getParam("frame_id", frame_id_);
+    private_nh.getParam("child_frame_id", child_frame_id_);
+    ROS_INFO("tf_topic: %s", tf_topic_.c_str());
+    ROS_INFO("polling: %d", polling_);
+    ROS_INFO("tf_polling_hz: %d", tf_polling_hz_);
+    ROS_INFO("frame_id: %s", frame_id_.c_str());
+    ROS_INFO("child_frame_id: %s", child_frame_id_.c_str());
   }
 
   bool testTransform() const {

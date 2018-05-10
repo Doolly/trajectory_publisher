@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <launch>
   <!-- TRAJECTORY_PUBLISHER -->
-  <node pkg="trajectory_publisher" type="trajectory_publisher" name="trajectory_publisher"/>
+  <node pkg="trajectory_publisher" type="trajectory_publisher" name="trajectory_publisher" output="screen">
+  	<param name="tf_topic" type="string" value="/tf"/>
+  	<param name="polling" type="bool" value="true"/>
+  	<param name="tf_polling_hz" type="int" value="250"/>
+  	<param name="frame_id" type="string" value="/world"/>
+  	<param name="child_frame_id" type="string" value="/imu"/>
+  </node>
 
   <!-- STATIC_TRANSFORM_PUBLISHER -->
   <node pkg="tf" type="static_transform_publisher" name="imu" args="0.1 0.2 0.3 0 0 0 /world /imu 50"/>
