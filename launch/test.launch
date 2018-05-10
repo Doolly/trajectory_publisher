@@ -3,7 +3,7 @@
   <!-- TRAJECTORY_PUBLISHER -->
   <node pkg="trajectory_publisher" type="trajectory_publisher" name="trajectory_publisher" output="screen">
   	<param name="tf_topic" type="string" value="/tf"/>
-  	<param name="polling" type="bool" value="true"/>
+  	<param name="polling" type="bool" value="false"/>
   	<param name="tf_polling_hz" type="int" value="250"/>
   	<param name="frame_id" type="string" value="/world"/>
   	<param name="child_frame_id" type="string" value="/imu"/>

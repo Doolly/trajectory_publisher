@@ -59,8 +59,21 @@ private:
   }
 
   void tfCallback(const tf::tfMessage::ConstPtr &tf_msg) {
-    // [ToDo] implement it
-    ROS_INFO("%s ++", __func__);
+    // Find specified transformation
+    for (const auto &tf_stamped : tf_msg->transforms) {
+      if (tf_stamped.child_frame_id == child_frame_id_ &&
+          tf_stamped.header.frame_id == frame_id_) {
+        const ros::Time &curr_tf_timestamp = tf_stamped.header.stamp;
+        const bool &newTf = checkCurrentTimestamp(curr_tf_timestamp);
+        // Add tf to trajectory only when the tf is new
+        if (newTf) {
+          tf::StampedTransform tf;
+          tf::transformStampedMsgToTF(tf_stamped, tf);
+          addTfToTrajectory(tf);
+          publishTrajectory();
+        }
+      }
+    }
   }
 
   void timerCallback(const ros::TimerEvent &) {
